@@ -3,21 +3,25 @@
 declare(strict_types=1);
 
 class Time{
-    public function inserirTime(string $nome)
+    public function inserirTime(string $nome) : int
     {
         $pdo = require "conexao.php";
 
         try{
-            if(!empty($nome) && !is_numeric($nome)){
+            if(empty($nome) || $nome == null){
+                return 1;
+            }else if(is_numeric($nome)){
+                return 2;
+            }else if(strlen($nome) > 100){
+                return 3;
+            }else{
                 $sql = "INSERT INTO time (nome) values (:nome)";
 
                 $stm = $pdo->prepare($sql);
                 $stm->bindValue(":nome", $nome);
                 $stm->execute();
 
-                return true;
-            }else{
-                return false;
+                return 0;
             }
         }catch(PDOException $e)
         {
@@ -30,7 +34,7 @@ class Time{
         try{
             $pdo = require "conexao.php";
 
-            $sql = "SELECT * FROM time";
+            $sql = "SELECT * FROM time ORDER BY nome";
             $stm = $pdo->query($sql);
     
             return $stm->fetchAll(); /* Retorna um array de arrays, onde cada row

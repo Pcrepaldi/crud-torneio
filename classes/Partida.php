@@ -3,12 +3,17 @@
 declare(strict_types=1);
 
 class Partida{
-    public function inserirPartida(int $id_time1, int $id_time2, $data, $horario){
+    public function inserirPartida(int $id_time1, int $id_time2, $data, $horario) : int
+    {
         $pdo = require "conexao.php";
         
         try{
-            if(!empty($id_time1) && !empty($id_time2)){
-                $sql = "INSERT INTO jogo (id, id_time1, id_time2, data, horario) values 
+            if(($id_time1 == 0) || $id_time2 == 0){
+                return 1;
+            }else if(($id_time1 == $id_time2)){
+                return 2;
+            }else{
+                $sql = "INSERT INTO partida (id, id_time1, id_time2, data, horario) values 
                 (null, :id_time1, :id_time2, :data, :horario)";
 
                 $stm = $pdo->prepare($sql);
@@ -18,9 +23,7 @@ class Partida{
                 $stm->bindValue(":horario", $horario);
                 $stm->execute();
 
-                return true;
-            }else{
-                return false;
+                return 0;
             }
         }catch(PDOException $e){
             echo $e->getMessage();
