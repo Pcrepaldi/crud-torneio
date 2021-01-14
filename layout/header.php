@@ -10,7 +10,7 @@
     <nav>
         <div class="navbar">
             <ul class="ul-navbar">
-                <li class="li-navbar logo"><a href="./index.php">LOGO</a></li>
+                <li class="li-navbar"><a href="./index.php">Logo</a></li>
                 <li class="li-navbar"><a href="./index.php">Home</a></li>
                 <li class="li-navbar"><a href="./cadastrarTime.php">Cadastrar Time</a></li>
                 <li class="li-navbar"><a href="./cadastrarPartida.php">Cadastrar Partida</a></li>

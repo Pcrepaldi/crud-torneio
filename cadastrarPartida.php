@@ -5,31 +5,33 @@
         <div class="container">
             <h1>Cadastro de Partidas</h1>
             <form method="post" action="cadastrarPartida.php" id="form-partida">
-                <select name="time_1" id="select">
-                    <?php
-                        require "./classes/Time.php";
+                <div class="div-select">
+                    <select name="time_1" id="select">
+                        <?php
+                            require "./classes/Time.php";
+                            $time = new Time();
+                            $times = $time->listarTime();
+    
+                            $total = count($time->listarTime());
 
-                        $time = new Time();
-
-                        $times = $time->listarTime();
-                        $total = count($time->listarTime());
-                        var_dump($time);
-
-                        echo "<option value='0' selected='selected'>Selecione...</option>";
-                        for($i=0; $i<$total; $i++){
-                            echo "<option value='".$times[$i]['id']."'>".$times[$i]['nome']."</option>";
-                        }
-
-                        echo "</select>";
-                        echo "<span> X </span>";
-                        echo "<select name='time_2' id='select'>";
-
-                        echo "<option value='0' select='selected'>Selecione...</option>";
-                        for($i=0; $i<$total; $i++){
-                            echo "<option value='".$times[$i]['id']."'>".$times[$i]['nome']."</option>";
-                        }
-                    ?>
-                </select>
+                            echo "<option value='0' selected='selected'>Selecione...</option>";
+                            for($i=0; $i<$total; $i++){
+                                echo "
+                                <option value='".$times[$i]['id']."'>".$times[$i]['nome']."</option>";
+                            }
+                        ?>
+                    </select>
+                    <span>X</span>
+                    <select name="time_2" id="select">
+                        <?php
+                            echo "<option value='0' selected='selected'>Selecione...</option>";
+                            for($i=0; $i<$total; $i++){
+                                echo "
+                                <option value='".$times[$i]['id']."'>".$times[$i]['nome']."</option>";
+                            }
+                        ?>
+                    </select>
+                </div>
                 <div class="data-horario">
                     <div id="data">
                         <label for="">Data da Partida</label>
