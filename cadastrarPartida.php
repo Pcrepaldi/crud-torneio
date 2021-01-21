@@ -61,7 +61,11 @@
                     $data = $_POST['data'];
                     $horario = $_POST['horario'];
 
-                    $cod = $partida->inserirPartida($time_1, $time_2, $data, $horario);
+                    $cod = 3;
+
+                    if(isset($time_1) && isset($time_2) && isset($data) && isset($time_1)){
+                        $cod = $partida->inserirPartida($time_1, $time_2, $data, $horario);
+                    }
 
                     switch($cod){
                         case 0:
@@ -73,10 +77,10 @@
                         case 2:
                             echo "<div class='message partida message-error'>$mensagens[2]</div>";
                             break;
+                        case 3:
+                            break;
                     }
                 ?>
             </form>
         </div>
-    </section>
-    </body>
-</html>
+    <?php require_once "./layout/footer.php";?>

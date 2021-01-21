@@ -8,11 +8,11 @@ class Time{
         $pdo = require "conexao.php";
 
         try{
-            if(empty($nome) || $nome == null){
+            if(empty($nome) || $nome === null){
                 return 1;
             }else if(is_numeric($nome)){
                 return 2;
-            }else if(strlen($nome) > 100){
+            }else if(strlen($nome) > 50){
                 return 3;
             }else{
                 $sql = "INSERT INTO time (nome) values (:nome)";
