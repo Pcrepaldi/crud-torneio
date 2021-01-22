@@ -11,11 +11,15 @@
         <nav>
             <div class="navbar">
                 <ul class="ul-navbar">
-                    <li class="li-navbar"><a href="./index.php">Logo</a></li>
+                    <li class="li-navbar logo"><a href="./index.php">Logo</a></li>
                     <li class="li-navbar"><a href="./index.php">Home</a></li>
                     <li class="li-navbar"><a href="./cadastrarTime.php">Cadastrar Time</a></li>
                     <li class="li-navbar"><a href="./cadastrarPartida.php">Cadastrar Partida</a></li>
                 </ul>
+                <form action="" method="get" class="navbar-buscar">
+                    <input type="text" name="filtrar" id="buscar">
+                    <input type="submit" value="lupa" id="lupa" value="Buscar">
+                </form>
             </div>
         </nav>
         </br>
