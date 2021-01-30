@@ -42,39 +42,41 @@ class Partida{
         }
     }
 
-    public function listarPartida()
+    public function listarPartida($filtrar)
     {
         try{
             $pdo = require "conexao.php";
 
             $sql = "SELECT 
-            partida.id, 
-            partida.id_times_partida, 
+            partida.id as id_partida, 
+            times_partida.id_time1, 
+            time1.nome as time_1, 
+            times_partida.id_time2, 
+            time2.nome as time_2,
             DATE_FORMAT(STR_TO_DATE(partida.data, '%Y-%m-%d'), '%d/%m/%Y') as data, 
-            TIME_FORMAT(partida.horario, '%H:%i') as horario
-            FROM partida ORDER BY data";
+            TIME_FORMAT(partida.horario, '%H:%i') as horario 
+            FROM partida 
+            INNER JOIN times_partida ON (times_partida.id = partida.id_times_partida)
+            INNER JOIN time time1 ON (time1.id = id_time1)
+            INNER JOIN time time2 ON (time2.id = id_time2)"
+            ;
 
-            $stm = $pdo->query($sql);
+            /*"ORDER BY partida.data;";*/
+
+            if(!empty($filtrar)){
+                $filtrar = "%$filtrar%";
+                $sql .= " WHERE (time1.nome LIKE ? OR time2.nome LIKE ?) ";
+                $stm = $pdo->prepare($sql);
+                $stm->bindValue(1, $filtrar);
+                $stm->bindValue(2, $filtrar);
+                $stm->execute();
+            }else{
+                $stm = $pdo->query($sql);
+            }
 
             return $stm->fetchAll();
         }catch(PDOException $e){
             echo $e->getMessage();
         }
-    }
-
-    public function listarTimesPartida($n)
-    {
-        try{
-            $pdo = require "conexao.php";
-
-            $sql = "SELECT time.nome FROM times_partida INNER JOIN time ON time.id = id_time".$n.";";
-
-            $stm = $pdo->query($sql);
-
-            return $stm->fetchAll();
-        }catch(PDOException $e){
-            echo $e->getMessage();
-        }
-        
     }
 }

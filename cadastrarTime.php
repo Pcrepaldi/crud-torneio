@@ -10,7 +10,10 @@
                 </div>
                 <?php
                     require "./classes/Time.php";
-                    $nome = $_POST['nome'];
+
+                    if(isset($POST['nome'])){
+                        $nome = $_POST['nome'];
+                    }
 
                     $time = new Time();
 

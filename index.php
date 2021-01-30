@@ -7,9 +7,12 @@
             $partida = new Partida();
             $time = new Time();
 
-            $partidas = $partida->listarPartida();
-            $times1 = $partida->listarTimesPartida(1);
-            $times2 = $partida->listarTimesPartida(2);
+            $filtrar = null;
+            if(isset($_GET['filtrar'])){
+                $filtrar = $_GET['filtrar'];
+            }
+
+            $partidas = $partida->listarPartida($filtrar);
 
             $total = count($partidas);
 
@@ -19,7 +22,7 @@
                             <span class="span-card-data">'.$partidas[$i]['data'].'</span>
                         </div>
                         <div class="card-time">
-                            <span class="span-card-times">'.$times1[$i]['nome'].' X '.$times2[$i]['nome'].'</span>
+                            <span class="span-card-times">'.$partidas[$i]['time_1'].' X '.$partidas[$i]['time_2'].'</span>
                         </div>
                         <div class="card-horario">
                             <span class="span-card-horario">'.$partidas[$i]['horario'].'</span>
