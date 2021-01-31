@@ -48,7 +48,8 @@ class Partida{
             $pdo = require "conexao.php";
 
             $sql = "SELECT 
-            partida.id as id_partida, 
+            partida.id as id_partida,
+            partida.id_times_partida, 
             times_partida.id_time1, 
             time1.nome as time_1, 
             times_partida.id_time2, 
@@ -61,20 +62,70 @@ class Partida{
             INNER JOIN time time2 ON (time2.id = id_time2)"
             ;
 
-            /*"ORDER BY partida.data;";*/
-
             if(!empty($filtrar)){
                 $filtrar = "%$filtrar%";
-                $sql .= " WHERE (time1.nome LIKE ? OR time2.nome LIKE ?) ";
+                $sql .= " WHERE (time1.nome LIKE ? OR time2.nome LIKE ?) ORDER BY partida.data DESC";
                 $stm = $pdo->prepare($sql);
                 $stm->bindValue(1, $filtrar);
                 $stm->bindValue(2, $filtrar);
                 $stm->execute();
             }else{
+                $sql .= " ORDER BY partida.data DESC";
                 $stm = $pdo->query($sql);
             }
 
             return $stm->fetchAll();
+        }catch(PDOException $e){
+            echo $e->getMessage();
+        }
+    }
+
+    public function listarPartidaId($id)
+    {
+        try{
+            $pdo = require "conexao.php";
+
+            $sql = "SELECT 
+            partida.id as id_partida, 
+            times_partida.id_time1, 
+            time1.nome as time_1, 
+            times_partida.id_time2, 
+            time2.nome as time_2, 
+            partida.data, 
+            partida.horario 
+            FROM partida 
+            INNER JOIN times_partida ON (times_partida.id = partida.id_times_partida)
+            INNER JOIN time time1 ON (time1.id = id_time1)
+            INNER JOIN time time2 ON (time2.id = id_time2)
+            WHERE partida.id = ?;";
+
+            $stm = $pdo->prepare($sql);
+            $stm->bindValue(1, $id);
+            $stm->execute();
+
+            return $stm->fetchAll();
+        }catch(PDOException $e){
+            echo $e->getMessage();
+        }
+    }
+
+    public function excluirPartida(int $id)
+    {
+        try{
+            $pdo = require "conexao.php";
+
+            $sql_partida = "DELETE FROM partida WHERE id_times_partida = ?";
+
+            $stm = $pdo->prepare($sql_partida);
+            $stm->bindValue(1, $id);
+            $stm->execute();
+
+            $sql_times_partida = "DELETE FROM times_partida WHERE id = ?";
+
+            $stm = $pdo->prepare($sql_times_partida);
+            $stm->bindValue(1, $id);
+            $stm->execute();
+
         }catch(PDOException $e){
             echo $e->getMessage();
         }

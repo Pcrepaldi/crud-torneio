@@ -7,13 +7,17 @@ class Time{
     {
         $pdo = require "conexao.php";
 
+        $time_existe = $this->time_existe($nome);
+
         try{
-            if(empty($nome) || $nome === null){
+            if(empty($nome) || $nome === null || strlen($nome) <= 0){
                 return 1;
             }else if(is_numeric($nome)){
                 return 2;
             }else if(strlen($nome) > 50){
                 return 3;
+            }else if($time_existe == true){
+                return 4;
             }else{
                 $sql = "INSERT INTO time (nome) values (:nome)";
 
@@ -34,7 +38,7 @@ class Time{
         try{
             $pdo = require "conexao.php";
 
-            $sql = "SELECT * FROM time ORDER BY nome";
+            $sql = "SELECT * FROM time ORDER BY nome;";
             $stm = $pdo->query($sql);
     
             return $stm->fetchAll(); /* Retorna um array de arrays, onde cada row
@@ -46,5 +50,19 @@ class Time{
             $e->getMessage();
         }
         
+    }
+
+    public function time_existe(string $nome_time) : bool
+    {
+        $times = $this->listarTime();
+        $total = count($times);
+        
+        for($i=0; $i<$total; $i++){
+            if(strcasecmp($times[$i]['nome'], $nome_time) == 0){
+                return true;
+                exit;
+            }
+        }
+        return false;
     }
 }

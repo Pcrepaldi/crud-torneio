@@ -109,8 +109,8 @@ th {
     display: row;
     text-align: center;
     width: 300px;
-    height: 110px;
-    margin: 10px;
+    height: 140px;
+    margin: 25px;
 }
 
 .card-data {
@@ -148,18 +148,16 @@ th {
     justify-content: center;
 }
 
-.btn-acessar {
-    display: block;
-    align-items: center;
-    justify-content: center;
-    background-color: rgb(247, 247, 247);
-    text-decoration: none;
+#acessar {
+    color: rgb(247, 247, 247);
     box-shadow: 0 4px 8px rgba(30, 60, 90, 0.2);
     transition: all 0.3s;
-    margin: 5px;
     border-radius: 5px;
-    color: rgb(38, 99, 180);
+    background-color: rgb(38, 99, 180);
     border: 1px solid rgb(38, 99, 180);
+    margin-top: -5px;
+    width: 40%;
+    font-size: 17px;
 }
 
 .span-card-horario {
@@ -216,13 +214,23 @@ input:hover {
     border: 1px solid rgb(38, 99, 180);
 }
 
-.btn-default:hover, .btn-acessar:hover {
+.btn-default:hover, #acessar:hover {
     transform: scale(1.1);
 }
 
 .btn-sucess {
     background-color: rgb(38, 99, 180);
     color: white;
+}
+
+.btn-danger {
+    background-color: rgb(211, 47, 47);
+    color: white;
+    border: 1px solid rgb(211, 47, 47);
+}
+
+.btn-danger:hover{
+    border: 1px solid rgb(211, 47, 47);
 }
 
 .message {
@@ -388,6 +396,21 @@ span {
     ul li {
         width: 100%;
         padding: 15px;
+    }
+
+    .navbar-buscar {
+        margin: auto;
+        width: 80%;
+        margin-bottom: 20px;
+        padding-left: 120%;
+    }
+
+    #buscar {
+        width: 80%;
+    }
+
+    #lupa {
+        right: 80px;
     }
 
     .btn-default {

@@ -11,7 +11,7 @@
                 <?php
                     require "./classes/Time.php";
 
-                    if(isset($POST['nome'])){
+                    if(isset($_POST['nome'])){
                         $nome = $_POST['nome'];
                     }
 
@@ -22,6 +22,7 @@
                     $mensagens[] = "Erro ao cadastrar: Nome não pode estar vazio";
                     $mensagens[] = "Erro ao cadastrar: Números não podem ser cadastrados";
                     $mensagens[] = "Erro ao cadastrar: Nome deve ter menos de 50 caracteres";
+                    $mensagens[] = "Erro ao cadastrar: Time já cadastrado";
 
                     if($nome != null){
                         $cod = $time->inserirTime($nome);
@@ -39,6 +40,8 @@
                             case 3:
                                 echo "<div class='message message-error'>$mensagens[3]</div>";
                                 break;
+                            case 4:
+                                echo "<div class='message message-error'>$mensagens[4]</div>";
                             default:
                                 break;
                         }

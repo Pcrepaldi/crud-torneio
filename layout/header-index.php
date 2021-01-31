@@ -16,6 +16,10 @@
                     <li class="li-navbar"><a href="./cadastrarTime.php">Cadastrar Time</a></li>
                     <li class="li-navbar"><a href="./cadastrarPartida.php">Cadastrar Partida</a></li>
                 </ul>
+                <form method="get" class="navbar-buscar">
+                    <input type="text" name="filtrar" id="buscar">
+                    <input type="submit" value="lupa" id="lupa" value="Buscar">
+                </form>
             </div>
         </nav>
         </br>
