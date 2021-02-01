@@ -1,9 +1,9 @@
 -- Nesse projeto foi usado o SQL Server Versao 8.0.22
--- Mudar USER E PASSWORD no codigo PHP se necessario
+-- Mudar USER E PASSWORD no codigo PHP se necessário
 
-CREATE DATABASE crud_torneio02;
+CREATE DATABASE crud_times;
 
-USE crud_torneio02;
+USE crud_times;
 
 CREATE TABLE IF NOT EXISTS time (
 	id int key auto_increment, 

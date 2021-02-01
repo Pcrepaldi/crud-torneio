@@ -16,6 +16,9 @@
 
             $total = count($partidas);
         ?>
+        <?php if($total == 0): ?>
+            <h3>Cadastre partidas para começar...</h3>
+        <?php endif; ?>
         <?php foreach($partidas as $p): ?>
             <div class="card-partida">
                 <div class="card-data">

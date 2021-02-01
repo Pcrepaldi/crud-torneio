@@ -5,7 +5,7 @@
     $pdo = null;
 
     try{
-        $DB_NAME = 'crud_torneio';
+        $DB_NAME = 'crud_times';
         $dsn = "mysql:host=localhost;dbname=$DB_NAME";
         $USER = 'root';
         $PASSWORD = 'Pl@c123123';
