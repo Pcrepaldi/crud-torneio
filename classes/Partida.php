@@ -130,4 +130,36 @@ class Partida{
             echo $e->getMessage();
         }
     }
+
+    public function atualizarPartida($id_partida, $id_time1, $id_time2, $data, $horario)
+    {
+        try{
+            if(!empty($id_partida) && !empty($id_time1) && !empty($id_time2) && !empty($data) && !empty($horario)){
+                $pdo = require "conexao.php";
+
+                $sql = "UPDATE times_partida SET id_time1 = ?, id_time2 = ? WHERE id = ?;";
+
+                $stm = $pdo->prepare($sql);
+                $stm->bindValue(1, $id_time1);
+                $stm->bindValue(2, $id_time2);
+                $stm->bindValue(3, $id_partida);
+                $stm->execute();
+
+                $sql = "UPDATE partida SET data = ?, horario = ? WHERE id_times_partida = ?";
+
+                $stm = $pdo->prepare($sql);
+                $stm->bindValue(1, $data);
+                $stm->bindValue(2, $horario);
+                $stm->bindValue(3, $id_partida);
+                $stm->execute();
+
+                return true;
+            }else{
+                return false;
+            }
+        }catch(PDOException $e){
+            $e->getMessage();
+        }
+
+    }
 }
